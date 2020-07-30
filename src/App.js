@@ -1,18 +1,26 @@
-import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import './App.css';
+import React, { useState } from "react";
+import "./App.scss";
+import Form from "./components/form";
+import Output from "./components/output";
 
-import TestPage from './pages/test-page/TestPage';
-import WelcomeScreen from './pages/welcome-screen/WelcomeScreen';
+function App() {
+  const [properties, setProperties] = useState({
+    bg: "white",
+    text: "black",
+    fontwt: 1000,
+    fontsize: 100,
+  });
+  return (
+    <div className="App">
+      <Form update={(properties) => setProperties(properties)} />
+      <Output
+        bg={properties.bg}
+        text={properties.text}
+        fontwt={properties.fontwt}
+        fontsize={properties.fontsize}
+      />
+    </div>
+  );
+}
 
-export default () => {
-    return (
-        <div className="ui container">
-            <h1 className="ui header center aligned">App</h1>
-            <Router>
-                <Route path="/test" exact component={TestPage} />
-                <Route path="/" exact component={WelcomeScreen} />
-            </Router>
-        </div>
-    );
-};
+export default App;
